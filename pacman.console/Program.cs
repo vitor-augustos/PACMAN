@@ -6,7 +6,15 @@ namespace pacman.console
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var screen = new Screen();
+            screen.Map.Initialize(32,32);
+
+            foreach(var col in screen.Map.Elements)
+            {
+
+                System.Console.Write(col.Draw().Result);
+                
+            }
         }
     }
 }
