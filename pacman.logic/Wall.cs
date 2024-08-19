@@ -1,11 +1,13 @@
 
 
+using pacman.logic;
 using System.Threading.Tasks;
 
 public class Wall : IElement
 {
-   public Task<char> Draw()
-   {
+    public Position Position { get; set; }
+    public Task<char> DrawAsChar()
+    {
         return Task.FromResult('█');
-   }
+    }
 }
