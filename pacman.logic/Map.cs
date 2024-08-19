@@ -55,4 +55,21 @@ public class Map
     }
 
     //TODO: implement TryMoveLeft function
+
+    public bool TryMoveLeft(IElement element)
+    {
+        if (element.Position.Horizontal - 1 <= 0)
+            return false;
+
+        Elements[element.Position.Horizontal, element.Position.Vertical] = _previousElementInPlace;
+
+        element.Position.Horizontal -= 1;
+
+        _previousElementInPlace = Elements[element.Position.Horizontal, element.Position.Vertical];
+
+        Elements[element.Position.Horizontal, element.Position.Vertical] = element;
+
+        return true;
+    }
+
 }

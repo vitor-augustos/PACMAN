@@ -58,7 +58,10 @@ public class Pacman : IElement, IPlayableElement
                 break;
 
             case Direction.Left:
-                //TODO: Apply left movement
+                if (!_map.TryMoveLeft(this))
+                {
+                    Direction = Direction.Stopped;
+                }
                 break;
 
             case Direction.Up:
