@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
+using System.Xml.Linq;
 
 namespace pacman.console
 {
@@ -10,7 +12,7 @@ namespace pacman.console
 
             var cancellationToken = new CancellationTokenSource();
 
-            screen.Map.Initialize(32, 1, cancellationToken);
+            screen.Map.Initialize(32, 32, cancellationToken);
 
             while (true)
             {
@@ -20,10 +22,24 @@ namespace pacman.console
                 }
 
                 System.Console.Clear();
-                foreach (var col in screen.Map.Elements)
+                //foreach (var col in screen.Map.Elements)
+                //{
+
+                //    System.Console.Write(col?.DrawAsChar().Result);
+                //}
+
+                for (int i = 0; i < screen.Map.Elements.GetLength(0); i++) // Loop over rows
                 {
-                    System.Console.Write(col?.DrawAsChar().Result);
+                    for (int j = 0; j < screen.Map.Elements.GetLength(1); j++) // Loop over columns
+                    {
+                        var currentElement = screen.Map.Elements[j, i];
+                        // Do something with currentElement
+                        Console.Write(currentElement?.DrawAsChar().Result);
+                    }
+                    Console.WriteLine();
                 }
+
+
                 Thread.Sleep(500);
                 if (System.Console.KeyAvailable)
                 {
