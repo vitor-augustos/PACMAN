@@ -21,7 +21,8 @@ namespace pacman.console
                     break;
                 }
 
-                System.Console.Clear();
+                Console.SetCursorPosition(0, 0);
+                //System.Console.Clear();
                 //foreach (var col in screen.Map.Elements)
                 //{
 
@@ -34,7 +35,12 @@ namespace pacman.console
                     {
                         var currentElement = screen.Map.Elements[j, i];
                         // Do something with currentElement
-                        Console.Write(currentElement?.DrawAsChar().Result);
+                        var characterInfo = currentElement?.DrawAsChar().Result;
+                        if (characterInfo != null)
+                        {
+                            Console.ForegroundColor = characterInfo.Color;
+                            Console.Write(characterInfo?.Character);
+                        }
                     }
                     Console.WriteLine();
                 }

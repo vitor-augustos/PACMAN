@@ -54,8 +54,6 @@ public class Map
         return true;
     }
 
-    //TODO: implement TryMoveLeft function
-
     public bool TryMoveLeft(IElement element)
     {
         if (element.Position.Horizontal - 1 <= 0)
@@ -64,6 +62,38 @@ public class Map
         Elements[element.Position.Horizontal, element.Position.Vertical] = _previousElementInPlace;
 
         element.Position.Horizontal -= 1;
+
+        _previousElementInPlace = Elements[element.Position.Horizontal, element.Position.Vertical];
+
+        Elements[element.Position.Horizontal, element.Position.Vertical] = element;
+
+        return true;
+    }
+
+    public bool TryMoveUp(IElement element)
+    {
+        if (element.Position.Vertical - 1 <= 0)
+            return false;
+
+        Elements[element.Position.Horizontal, element.Position.Vertical] = _previousElementInPlace;
+
+        element.Position.Vertical -= 1;
+
+        _previousElementInPlace = Elements[element.Position.Horizontal, element.Position.Vertical];
+
+        Elements[element.Position.Horizontal, element.Position.Vertical] = element;
+
+        return true;
+    }
+
+    public bool TryMoveDown(IElement element)
+    {
+        if (element.Position.Vertical + 1 >= _maxHeight)
+            return false;
+
+        Elements[element.Position.Horizontal, element.Position.Vertical] = _previousElementInPlace;
+
+        element.Position.Vertical += 1;
 
         _previousElementInPlace = Elements[element.Position.Horizontal, element.Position.Vertical];
 

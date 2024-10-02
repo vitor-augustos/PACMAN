@@ -1,4 +1,5 @@
-using pacman.logic;
+﻿using pacman.logic;
+using pacman.logic.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,14 +29,14 @@ public class Pacman : IElement, IPlayableElement
         }
     }
 
-    public Task<char> DrawAsChar()
+    public Task<CharDrawing> DrawAsChar()
     => this.Direction switch
     {
-        Direction.Up => Task.FromResult('v'),
-        Direction.Down => Task.FromResult('^'),
-        Direction.Right => Task.FromResult('<'),
-        Direction.Left => Task.FromResult('>'),
-        _ => Task.FromResult('x')
+        Direction.Up => Task.FromResult(new CharDrawing('v', System.ConsoleColor.Yellow)),
+        Direction.Down => Task.FromResult(new CharDrawing('^', System.ConsoleColor.Yellow)),
+        Direction.Right => Task.FromResult(new CharDrawing('<', System.ConsoleColor.Yellow)),//𐒨
+        Direction.Left => Task.FromResult(new CharDrawing('>', System.ConsoleColor.Yellow)),//𐒧
+        _ => Task.FromResult(new CharDrawing('x', System.ConsoleColor.Yellow))
     };
 
     private Task MoveOneStep()
@@ -65,9 +66,17 @@ public class Pacman : IElement, IPlayableElement
                 break;
 
             case Direction.Up:
+                if (!_map.TryMoveUp(this))
+                {
+                    Direction = Direction.Stopped;
+                }
                 break;
 
             case Direction.Down:
+                if (!_map.TryMoveDown(this))
+                {
+                    Direction = Direction.Stopped;
+                }
                 break;
 
             default:
@@ -87,6 +96,16 @@ public class Pacman : IElement, IPlayableElement
         if (keyPressed == System.ConsoleKey.LeftArrow)
         {
             Direction = Direction.Left;
+        }
+
+        if (keyPressed == System.ConsoleKey.UpArrow)
+        {
+            Direction = Direction.Up;
+        }
+
+        if (keyPressed == System.ConsoleKey.DownArrow)
+        {
+            Direction = Direction.Down;
         }
 
         return Task.CompletedTask;

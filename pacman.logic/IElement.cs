@@ -1,8 +1,9 @@
 using pacman.logic;
+using pacman.logic.Drawing;
 using System.Threading.Tasks;
 
 public interface IElement
 {
-    Task<char> DrawAsChar();
+    Task<CharDrawing> DrawAsChar();
     Position Position { get; set; }
 }
