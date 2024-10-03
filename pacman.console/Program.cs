@@ -14,6 +14,9 @@ namespace pacman.console
 
             screen.Map.Initialize(32, 32, cancellationToken);
 
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.CursorVisible = false;
+
             while (true)
             {
                 if (cancellationToken.IsCancellationRequested)

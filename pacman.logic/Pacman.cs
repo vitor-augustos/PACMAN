@@ -32,10 +32,10 @@ public class Pacman : IElement, IPlayableElement
     public Task<CharDrawing> DrawAsChar()
     => this.Direction switch
     {
-        Direction.Up => Task.FromResult(new CharDrawing('v', System.ConsoleColor.Yellow)),
-        Direction.Down => Task.FromResult(new CharDrawing('^', System.ConsoleColor.Yellow)),
-        Direction.Right => Task.FromResult(new CharDrawing('<', System.ConsoleColor.Yellow)),//𐒨
-        Direction.Left => Task.FromResult(new CharDrawing('>', System.ConsoleColor.Yellow)),//𐒧
+        Direction.Up => Task.FromResult(new CharDrawing('\u19A2', System.ConsoleColor.Yellow)),
+        Direction.Down => Task.FromResult(new CharDrawing('\u1985', System.ConsoleColor.Yellow)),
+        Direction.Right => Task.FromResult(new CharDrawing('\u03F2', System.ConsoleColor.Yellow)),//𐒨
+        Direction.Left => Task.FromResult(new CharDrawing('\u037B', System.ConsoleColor.Yellow)),//𐒧
         _ => Task.FromResult(new CharDrawing('x', System.ConsoleColor.Yellow))
     };
 
